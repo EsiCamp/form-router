@@ -215,6 +215,8 @@ export default {
           active: this.checkBox,
         };
         this.sendList(user);
+        // eslint-disable-next-line no-alert
+        alert('ثبت نام با موفقیت انجام شد');
       }
       e.preventDefault();
     },
