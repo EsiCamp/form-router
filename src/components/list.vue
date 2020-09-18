@@ -135,18 +135,6 @@
 <script>
 export default {
   filters: {
-    upperUser(username) {
-      // eslint-disable-next-line no-param-reassign
-      username = username.toString();
-      return username.toUpperCase().trim();
-    },
-    changePhone(phone) {
-      // eslint-disable-next-line no-param-reassign
-      phone = phone.toString();
-      return `+98${phone.slice(1)}`;
-    },
-  },
-  filters: {
     userFormat(value) {
       // eslint-disable-next-line no-param-reassign
       value = value.toString();
