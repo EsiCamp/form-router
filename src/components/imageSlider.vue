@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <div class="slides">
       <div>
         <img :src="images[cimg]">

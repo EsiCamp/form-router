@@ -2,9 +2,9 @@
   <div class="form_cnt">
     <pageHeader />
     <home />
+    <router-view />
     <imageSlider />
     <pageFooter />
-    <router-view />
   </div>
 </template>
 

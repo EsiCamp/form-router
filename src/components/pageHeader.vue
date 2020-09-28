@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="main_header container">
     <h1>
       هدر
     </h1>

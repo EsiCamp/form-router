@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="main_footer container">
     <h2>
       فوتر
     </h2>

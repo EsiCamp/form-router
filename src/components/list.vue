@@ -18,7 +18,7 @@
         </router-link>
       </button>
     </div>
-    <div class="table-container mrgt">
+    <div class="table-container mrgt mrgbt">
       <table
         v-if="userDetails.length > 0"
         class="table is-bordered"
