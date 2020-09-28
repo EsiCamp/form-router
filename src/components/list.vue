@@ -1,5 +1,10 @@
 <template>
   <div>
+    <modal
+      v-if="showModal"
+      :name="showUser"
+      @close="showModal = false"
+    />
     <div class="control">
       <button
         class="button is-link is-light"
@@ -48,7 +53,8 @@
             <a
               href="#"
               class="username"
-              @click="showData(user)"
+              name="Modal"
+              @click="showData(user),showModal = true"
             >
               {{ user.username }}
             </a>
@@ -75,86 +81,29 @@
         </tr>
       </table>
     </div>
-    <!-- MODAL -->
-    <transition
-      v-if="showModal"
-      name="modal"
-    >
-      <div class="modal-mask">
-        <div class="modal-wrapper">
-          <div class="modal-container">
-            <div class="modal-header">
-              <h3>
-                مشخصات افراد ثبت نام شده
-              </h3>
-            </div>
-            <div class="modal-body">
-              <slot name="body">
-                <div v-if="showUser.active === true">
-                  <div class="mrgbt">
-                    نام کاربری:
-                    {{ showUser.username | userFormat }}
-                  </div>
-                  <div class="mrgbt">
-                    کد ملی:
-                    {{ showUser.nationalID }}
-                  </div>
-                  <div class="mrgbt">
-                    موبایل:
-                    {{ showUser.mobilePhone | phoneFormat }}
-                  </div>
-                  <div class="mrgbt">
-                    رمز عبور:
-                    {{ showUser.password }}
-                  </div>
-                </div>
-                <div v-else>
-                  کاربر فعال نمی باشد
-                </div>
-              </slot>
-            </div>
-
-            <div class="modal-footer">
-              <slot name="footer">
-                <button
-                  class="modal-default-button"
-                  @click="closeModal"
-                >
-                  بستن
-                </button>
-              </slot>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
-    <!-- END OF MODAL -->
   </div>
 </template>
 
 <script>
+import Modal from './modal.vue';
+
 export default {
-  filters: {
-    userFormat(value) {
-      // eslint-disable-next-line no-param-reassign
-      value = value.toString();
-      return value.toUpperCase().trim();
-    },
-    phoneFormat(phone) {
-      // eslint-disable-next-line no-param-reassign
-      phone = phone.toString();
-      return `98${phone.slice(1)}+`;
-    },
+  components: {
+    Modal,
   },
   data() {
     return {
       userDetails: [],
       showUser: '',
-      showModal: false,
       users: [],
+      showModal: false,
     };
   },
   methods: {
+    showData(userData) {
+      // this.showModal = true;
+      this.showUser = userData;
+    },
     filterTable(status) {
       if (status) {
         this.userDetails = this.users.filter((user) => user.active === true);
@@ -178,13 +127,6 @@ export default {
           this.userDetails = data;
           this.users = data;
         });
-    },
-    showData(userData) {
-      this.showModal = true;
-      this.showUser = userData;
-    },
-    closeModal() {
-      this.showModal = false;
     },
   },
 };
